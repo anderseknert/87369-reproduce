@@ -16,3 +16,8 @@ Namespaces are listed as provided token is valid.
 
 Exec credential plugin is called to retrieve possible client certifcates.
 Note that this is only triggered if the server advertised client certificate auth capabilities in the TLS handshake.
+
+```
+$ kubectl get namespaces --kubeconfig=kubeconfig.yaml --token=admin-token
+Unable to connect to the server: decoding stdout: couldn't get version/kind; json parse error: json: cannot unmarshal string into Go value of type struct { APIVersion string "json:\"apiVersion,omitempty\""; Kind string "json:\"kind,omitempty\"" }
+```
