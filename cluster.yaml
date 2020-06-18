@@ -1,0 +1,24 @@
+# https://pkg.go.dev/k8s.io/kubernetes@v1.18.3/cmd/kubeadm/app/apis/kubeadm/v1beta2?tab=doc
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+networking:
+  apiServerPort: 6443
+nodes:
+- role: control-plane
+  extraMounts:
+  - hostPath: tokens
+    containerPath: /tokens
+kubeadmConfigPatches:
+- |
+  kind: ClusterConfiguration
+  metadata:
+    name: config
+  apiServer:
+    extraArgs:
+      token-auth-file: /tokens/tokens.csv
+    extraVolumes:
+    - name: tokens
+      hostPath: /tokens
+      mountPath: /tokens
+      readOnly: true
+      pathType: Directory
